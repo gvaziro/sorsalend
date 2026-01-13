@@ -2,7 +2,7 @@
 
 import { TrendingUp, Users, Building2, Star, ChevronRight, Zap } from "lucide-react"
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
 const trendingAccounts = [
   { name: "Solana", handle: "@solana", score: 3237, change: 12, avatar: "S" },
@@ -28,7 +28,13 @@ const socialFeedPool = [
   { id: 5, user: "Alpha Hunter", text: "Found a new early stage project on Sorsa.", type: "kol" },
 ]
 
-export function FloatingCard({ children, className = "", delay = 0 }) {
+interface FloatingCardProps {
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}
+
+export function FloatingCard({ children, className = "", delay = 0 }: FloatingCardProps) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
