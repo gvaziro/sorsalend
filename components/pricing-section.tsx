@@ -34,13 +34,13 @@ export function PricingSection() {
   const [isYearly, setIsYearly] = useState(true)
 
   return (
-    <section id="pricing" className="py-32 relative">
+    <section id="pricing" className="py-16 sm:py-24 lg:py-32 relative">
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <p className="text-sm font-medium text-primary mb-4">Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Simple, transparent pricing</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Choose the plan that fits your needs</p>
+          <p className="mt-4 text-base sm:text-lg text-muted-foreground">Choose the plan that fits your needs</p>
 
           {/* Toggle */}
           <div className="flex items-center justify-center gap-4 mt-8">

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { BarChart3, Bot, Building2, Sparkles, Search, Code2, ArrowUpRight, Cpu, Network, ShieldCheck, Zap } from "lucide-react"
 
@@ -212,13 +213,22 @@ function APIVisual() {
 }
 
 export function FeaturesGrid() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
   return (
-    <section id="features" className="py-32 relative overflow-hidden">
+    <section id="features" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header */}
-        <div className="max-w-3xl mb-20">
+        <div className="max-w-3xl mb-12 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -227,42 +237,51 @@ export function FeaturesGrid() {
           >
             Capabilities
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight mb-6">
             Everything you need for <span className="text-glow">Crypto Intelligence</span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">
             A complete suite of tools to analyze, track, and discover opportunities in the crypto social layer.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div 
-              key={index} 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group flex flex-col glass rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-500"
-            >
-              {/* Visual Preview */}
-              <div className={`h-44 w-full bg-gradient-to-br ${feature.color} border-b border-white/5`}>
-                {feature.visual}
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {features.map((feature, index) => {
+            const MotionDiv = isMobile ? "div" : motion.div;
+            return (
+              <MotionDiv 
+                key={index} 
+                {...(!isMobile ? {
+                  initial: { opacity: 0, y: 20 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true, amount: 0.2 },
+                  transition: { 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: [0.21, 0.47, 0.32, 0.98] 
+                  }
+                } : {})}
+                className="group flex flex-col glass rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-500"
+              >
+                {/* Visual Preview */}
+                <div className={`h-40 sm:h-44 w-full bg-gradient-to-br ${feature.color} border-b border-white/5`}>
+                  {feature.visual}
+                </div>
 
-              {/* Text Content */}
-              <div className="p-8 flex flex-col flex-1">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
-                  {feature.title}
-                  <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+                {/* Text Content */}
+                <div className="p-6 sm:p-8 flex flex-col flex-1">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
+                    {feature.title}
+                    <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </h3>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </MotionDiv>
+            )
+          })}
         </div>
       </div>
     </section>

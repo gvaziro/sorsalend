@@ -1,12 +1,13 @@
+import Link from "next/link"
 import { Code2, ArrowUpRight } from "lucide-react"
 
 export function APISection() {
   return (
-    <section id="api" className="py-32 relative">
+    <section id="api" className="py-16 sm:py-24 lg:py-32 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/[0.02] to-transparent" />
 
       <div className="relative mx-auto max-w-6xl px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Code block */}
           <div className="order-2 lg:order-1">
             <div className="glass rounded-2xl overflow-hidden">
@@ -21,38 +22,42 @@ export function APISection() {
               </div>
 
               {/* Code */}
-              <pre className="p-6 text-sm overflow-x-auto font-mono">
+              <pre className="p-4 sm:p-6 text-[10px] sm:text-sm overflow-x-auto font-mono whitespace-pre-wrap sm:whitespace-pre break-all sm:break-normal">
                 <code>
+                  <span className="text-[#c792ea]">const</span> <span className="text-foreground">url</span>{" "}
+                  <span className="text-[#c792ea]">=</span> <span className="text-[#c3e88d]">{`'https://api.sorsa.io/v2/score/{user_handle}'`}</span>;
+                  {"\n"}
+                  <span className="text-[#c792ea]">const</span> <span className="text-foreground">options</span>{" "}
+                  <span className="text-[#c792ea]">=</span> {`{\n`}
+                  {"  "}
+                  <span className="text-foreground">method</span>: <span className="text-[#c3e88d]">{`'GET'`}</span>,
+                  {"\n"}
+                  {"  "}
+                  <span className="text-foreground">headers</span>: {`{`}
+                  <span className="text-foreground">Accept</span>: <span className="text-[#c3e88d]">{`'application/json'`}</span>,{" "}
+                  <span className="text-foreground">ApiKey</span>: <span className="text-[#c3e88d]">{`'5cea4088-e8ae-49e6-beec-481f9bab6925'`}</span>
+                  {`}\n`}
+                  {`};\n\n`}
+                  <span className="text-[#c792ea]">try</span> {`{\n`}
+                  {"  "}
                   <span className="text-[#c792ea]">const</span> <span className="text-foreground">response</span>{" "}
                   <span className="text-[#c792ea]">=</span> <span className="text-[#c792ea]">await</span>{" "}
-                  <span className="text-[#82aaff]">fetch</span>(
-                  <span className="text-[#c3e88d]">{`"https://api.sorsa.io/v1/score"`}</span>, {`{\n`}
-                  {"  "}
-                  <span className="text-foreground">method</span>: <span className="text-[#c3e88d]">{`"POST"`}</span>,
+                  <span className="text-[#82aaff]">fetch</span>(url, options);
                   {"\n"}
                   {"  "}
-                  <span className="text-foreground">headers</span>: {`{\n`}
-                  {"    "}
-                  <span className="text-[#c3e88d]">{`"Authorization"`}</span>:{" "}
-                  <span className="text-[#c3e88d]">{`\`Bearer \${API_KEY}\``}</span>,{"\n"}
-                  {"    "}
-                  <span className="text-[#c3e88d]">{`"Content-Type"`}</span>:{" "}
-                  <span className="text-[#c3e88d]">{`"application/json"`}</span>
+                  <span className="text-[#c792ea]">const</span> <span className="text-foreground">data</span>{" "}
+                  <span className="text-[#c792ea]">=</span> <span className="text-[#c792ea]">await</span>{" "}
+                  <span className="text-foreground">response</span>.<span className="text-[#82aaff]">json</span>();
                   {"\n"}
                   {"  "}
-                  {`},\n`}
-                  {"  "}
-                  <span className="text-foreground">body</span>: <span className="text-[#82aaff]">JSON</span>.
-                  <span className="text-[#82aaff]">stringify</span>({`{\n`}
-                  {"    "}
-                  <span className="text-foreground">handle</span>:{" "}
-                  <span className="text-[#c3e88d]">{`"@VitalikButerin"`}</span>
+                  <span className="text-[#82aaff]">console</span>.<span className="text-[#82aaff]">log</span>(data);
                   {"\n"}
+                  {`} `}
+                  <span className="text-[#c792ea]">catch</span> (error) {`{\n`}
                   {"  "}
-                  {`})\n`}
-                  {`}`});
-                  {"\n\n"}
-                  <span className="text-muted-foreground">{`// Response: { score: 4892, tier: "Supreme" }`}</span>
+                  <span className="text-[#82aaff]">console</span>.<span className="text-[#82aaff]">error</span>(error);
+                  {"\n"}
+                  {`}`}
                 </code>
               </pre>
             </div>
@@ -69,7 +74,7 @@ export function APISection() {
               Build with <span className="text-glow">Sorsa API</span>
             </h2>
 
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
               Full programmatic access to all Sorsa data. Perfect for trading bots, research platforms, and custom
               analytics dashboards.
             </p>
@@ -77,20 +82,23 @@ export function APISection() {
             <ul className="space-y-4 mb-10">
               {[
                 "3x cheaper than official Twitter API",
-                "100x higher rate limits",
+                "Flexible pricing — pick only what you need",
                 "Developer-friendly documentation",
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-muted-foreground">
+                <li key={i} className="flex items-center gap-3 text-sm sm:text-base text-muted-foreground">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                   {item}
                 </li>
               ))}
             </ul>
 
-            <button className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow">
-              View API Docs
+            <Link 
+              href="https://sorsa.io/docs.html"
+              className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow w-fit"
+            >
+              View API Details
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

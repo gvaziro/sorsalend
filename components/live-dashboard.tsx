@@ -18,6 +18,14 @@ const vcActivity = [
 export function LiveDashboard() {
   const [searchQuery, setSearchQuery] = useState("")
 
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault()
+    if (searchQuery.trim()) {
+      const handle = searchQuery.trim().replace(/^@/, "")
+      window.location.href = `https://sorsa.io/profile/${handle}`
+    }
+  }
+
   return (
     <div className="relative">
       {/* Glow effect */}
@@ -42,7 +50,7 @@ export function LiveDashboard() {
         {/* Dashboard content */}
         <div className="p-6">
           {/* Search bar */}
-          <div className="flex items-center gap-3 max-w-xl mb-8">
+          <form onSubmit={handleSearch} className="flex items-center gap-3 max-w-xl mb-8">
             <div className="flex-1 flex items-center gap-3 px-4 py-3 glass rounded-xl">
               <Search className="h-4 w-4 text-muted-foreground" />
               <input
@@ -53,10 +61,13 @@ export function LiveDashboard() {
                 className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               />
             </div>
-            <button className="px-5 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-xl hover:opacity-90 transition-opacity">
+            <button 
+              type="submit"
+              className="px-5 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-xl hover:opacity-90 transition-opacity"
+            >
               Search
             </button>
-          </div>
+          </form>
 
           {/* Dashboard grid */}
           <div className="grid lg:grid-cols-3 gap-4">

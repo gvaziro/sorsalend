@@ -24,7 +24,7 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap gap-16">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-12 gap-y-10 sm:gap-16">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
                 <h4 className="text-sm font-medium mb-4">{category}</h4>

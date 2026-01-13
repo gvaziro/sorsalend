@@ -34,10 +34,10 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="py-32 relative">
+    <section className="py-16 sm:py-24 lg:py-32 relative">
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <p className="text-sm font-medium text-primary mb-4">FAQ</p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Frequently asked questions</h2>
         </div>

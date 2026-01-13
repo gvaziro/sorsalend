@@ -1,10 +1,29 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { ArrowUpRight, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
 import { FloatingCard, TrendingCard, ScoreCard, VCActivityCard, SocialFeedCard } from "./dashboard-cards"
 
 export function HeroSection() {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault()
+    if (searchQuery.trim()) {
+      const handle = searchQuery.trim().replace(/^@/, "")
+      window.location.href = `https://sorsa.io/profile/${handle}`
+    }
+  }
+
   return (
     <section className="relative min-h-[900px] flex items-center justify-center pt-20 pb-24 overflow-hidden">
       {/* Background layers */}
@@ -56,9 +75,9 @@ export function HeroSection() {
           <div className="text-center max-w-2xl mx-auto relative z-10 py-12">
             {/* Badge */}
             <motion.div 
-              initial={{ opacity: 0, y: 10 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: isMobile ? 0 : 0.5 }}
               className="flex justify-center mb-8"
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium glass rounded-full border border-primary/20">
@@ -69,9 +88,9 @@ export function HeroSection() {
 
             {/* Headline */}
             <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: isMobile ? 0 : 0.6, delay: isMobile ? 0 : 0.1 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-8"
             >
               <span className="text-balance">Crypto Twitter intelligence for </span>
@@ -79,9 +98,9 @@ export function HeroSection() {
             </motion.h1>
 
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0 : 0.6, delay: isMobile ? 0 : 0.2 }}
               className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto text-pretty leading-relaxed mb-10"
             >
               Track influencers, detect bots, analyze VC activity, and discover early projects before they trend.
@@ -89,13 +108,13 @@ export function HeroSection() {
 
             {/* Search and CTAs */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col items-center gap-6 max-w-xl mx-auto"
+              transition={{ duration: isMobile ? 0 : 0.6, delay: isMobile ? 0 : 0.3 }}
+              className="flex flex-col items-center gap-6 max-w-xl mx-auto w-full"
             >
               {/* Search Bar */}
-              <div className="relative group w-full">
+              <form onSubmit={handleSearch} className="relative group w-full">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 <div className="relative flex items-center gap-3 px-6 py-4 bg-black/40 backdrop-blur-md rounded-2xl border border-white/5 shadow-2xl transition-all duration-300 group-hover:border-white/10 group-hover:bg-black/50">
                   <div className="w-5 h-5 flex items-center justify-center text-primary/70">
@@ -107,39 +126,30 @@ export function HeroSection() {
                     type="text" 
                     placeholder="Enter @handle or paste link..."
                     className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground/40 focus:outline-none text-base font-medium"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <button className="hidden sm:flex items-center justify-center w-8 h-8 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors border border-primary/20">
+                  <button 
+                    type="submit"
+                    className="hidden sm:flex items-center justify-center w-8 h-8 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors border border-primary/20"
+                  >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
                     </svg>
                   </button>
                 </div>
-              </div>
+              </form>
 
               {/* Primary CTA */}
-              <button className="group relative inline-flex items-center justify-center gap-2 px-10 py-4 text-base font-bold bg-primary text-primary-foreground rounded-full hover:opacity-95 transition-all glow active:scale-95">
+              <button 
+                onClick={handleSearch}
+                className="group relative inline-flex items-center justify-center gap-2 px-10 py-4 text-base font-bold bg-primary text-primary-foreground rounded-full hover:opacity-95 transition-all glow active:scale-95"
+              >
                 Start analyzing
                 <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
             </motion.div>
           </div>
-
-          {/* Mobile view of cards - shown below on small screens */}
-          <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 mt-20 w-full max-w-2xl mx-auto">
-            <FloatingCard delay={0.4}>
-              <TrendingCard />
-            </FloatingCard>
-            <FloatingCard delay={0.5}>
-              <SocialFeedCard />
-            </FloatingCard>
-            <FloatingCard delay={0.6}>
-              <ScoreCard />
-            </FloatingCard>
-            <FloatingCard delay={0.7}>
-              <VCActivityCard />
-            </FloatingCard>
-          </div>
-
         </div>
       </div>
     </section>

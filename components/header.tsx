@@ -3,13 +3,21 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { SorsaLogo } from "./sorsa-logo"
-import { Menu, X, ArrowUpRight, Search } from "lucide-react"
+import { ArrowUpRight, Search } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault()
+    if (searchQuery.trim()) {
+      const handle = searchQuery.trim().replace(/^@/, "")
+      window.location.href = `https://sorsa.io/profile/${handle}`
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,19 +74,24 @@ export function Header() {
                   transition={{ duration: 0.2 }}
                   className="w-full"
                 >
-                  <div className="relative group">
+                  <form onSubmit={handleSearch} className="relative group">
                     <div className="relative flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg transition-all duration-300 group-hover:border-white/20 group-hover:bg-white/10">
                       <Search className="w-4 h-4 text-primary/70" />
                       <input 
                         type="text" 
                         placeholder="Search @handle..."
                         className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none font-medium"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
-                      <button className="hidden lg:flex items-center justify-center w-7 h-7 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors border border-primary/20">
+                      <button 
+                        type="submit"
+                        className="hidden lg:flex items-center justify-center w-7 h-7 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors border border-primary/20"
+                      >
                         <Search className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                  </div>
+                  </form>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -95,39 +108,13 @@ export function Header() {
             </button>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {/* Mobile CTA */}
+          <button className="md:hidden group flex items-center gap-1.5 px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow shrink-0">
+            Get started
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border">
-          <nav className="flex flex-col p-6 gap-2">
-            {["Features", "API", "Pricing"].map((item) => (
-              <Link
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="px-4 py-3 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item}
-              </Link>
-            ))}
-            <div className="flex flex-col gap-2 pt-4 mt-4 border-t border-border">
-              <button className="px-4 py-3 text-sm text-muted-foreground">Sign in</button>
-              <button className="px-4 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-full">
-                Get started
-              </button>
-            </div>
-          </nav>
-        </div>
-      )}
     </header>
   )
 }

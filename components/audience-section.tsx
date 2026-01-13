@@ -482,16 +482,34 @@ function ProjectVisual() {
 }
 
 export function AudienceSection() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % audiences.length)
+    }, 2000)
+    
+    return () => {
+      window.removeEventListener("resize", checkMobile)
+      clearInterval(interval)
+    }
+  }, [])
+
   return (
-    <section className="relative py-32 overflow-hidden border-y border-white/5">
+    <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden border-y border-white/5">
       <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
       
       {/* Decorative background glows */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary/10 rounded-full blur-[100px] sm:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/5 rounded-full blur-[120px] sm:blur-[150px] pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -500,10 +518,10 @@ export function AudienceSection() {
           >
             User Categories
           </motion.div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
             Turn Social Noise into <span className="text-glow">Actionable Alpha</span>
           </h2>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-muted-foreground text-base sm:text-xl max-w-2xl mx-auto leading-relaxed">
             Sorsa turns social noise into actionable intelligence for every player in the crypto economy.
           </p>
         </div>
@@ -512,11 +530,15 @@ export function AudienceSection() {
           {audiences.map((audience, i) => (
             <motion.div 
               key={i} 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ 
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ 
+                duration: isMobile ? 0 : 0.5, 
+                delay: isMobile ? 0 : i * 0.1,
+                ease: [0.21, 0.47, 0.32, 0.98] 
+              }}
+              whileHover={isMobile ? {} : { 
                 y: -10,
                 transition: { duration: 0.3, ease: "easeOut" }
               }}
@@ -529,7 +551,7 @@ export function AudienceSection() {
               <div className="absolute -inset-[1px] bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl -z-10" />
 
               {/* Visual Container */}
-              <div className={`h-48 w-full bg-gradient-to-br ${audience.color} border-b border-white/5 relative flex items-center justify-center overflow-hidden`}>
+              <div className={`h-40 sm:h-48 w-full bg-gradient-to-br ${audience.color} border-b border-white/5 relative flex items-center justify-center overflow-hidden`}>
                 <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:30px_30px]" />
                 <motion.div 
                   className="relative z-10 w-full h-full flex items-center justify-center"
@@ -549,27 +571,36 @@ export function AudienceSection() {
               </div>
 
               {/* Content */}
-              <div className="p-8 flex flex-col flex-1 relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">
+              <div className="p-6 sm:p-8 flex flex-col flex-1 relative z-10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold group-hover:text-primary transition-colors duration-300">
                     {audience.title}
                   </h3>
-                  <a 
+                  <motion.a 
                     href={audience.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-transparent border border-white/10 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 hover:bg-primary hover:text-white hover:border-primary hover:shadow-[0_4px_12px_rgba(36,121,255,0.3)] hover:scale-105 transition-all duration-300 whitespace-nowrap"
+                    animate={{
+                      backgroundColor: i === activeIndex ? "rgba(36, 121, 255, 0.25)" : "rgba(255, 255, 255, 0)",
+                      borderColor: i === activeIndex ? "rgba(36, 121, 255, 0.5)" : "rgba(255, 255, 255, 0.1)",
+                      color: i === activeIndex ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.6)",
+                      scale: i === activeIndex ? 1.05 : 1,
+                      boxShadow: i === activeIndex ? "0 0 20px rgba(36, 121, 255, 0.3)" : "none"
+                    }}
+                    transition={{ duration: 1 }}
+                    className="inline-flex items-center justify-center px-4 py-2 sm:py-2.5 rounded-full border text-[10px] font-bold uppercase tracking-widest whitespace-nowrap w-fit"
                   >
                     It's me
                     <motion.span
                       className="ml-1.5"
-                      initial={{ x: 0 }}
+                      animate={i === activeIndex ? { x: [0, 2, 0] } : { x: 0 }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
                     >
                       →
                     </motion.span>
-                  </a>
+                  </motion.a>
                 </div>
-                <p className="text-muted-foreground leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed group-hover:text-white/80 transition-colors duration-300">
                   {audience.description}
                 </p>
               </div>
