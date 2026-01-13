@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 export function CTASection() {
@@ -17,13 +18,19 @@ export function CTASection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-stretch">
-              <button className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow">
+              <Link 
+                href="https://app.sorsa.io"
+                className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow"
+              >
                 Start for free
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
-              <button className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-foreground glass rounded-full glass-hover">
-                Schedule demo
-              </button>
+              </Link>
+              <Link 
+                href="https://sorsa.io/docs.html"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-foreground glass rounded-full glass-hover"
+              >
+                View Documentation
+              </Link>
             </div>
           </div>
         </div>

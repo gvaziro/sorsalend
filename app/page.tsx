@@ -20,7 +20,6 @@ export default function Home() {
       <APISection />
       <PricingSection />
       <FAQSection />
-      <CTASection />
       <Footer />
     </main>
   )

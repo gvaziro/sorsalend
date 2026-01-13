@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 import { Check, ArrowUpRight } from "lucide-react"
 
@@ -96,7 +97,8 @@ export function PricingSection() {
                 ))}
               </ul>
 
-              <button
+              <Link
+                href="https://app.sorsa.io"
                 className={`mt-8 w-full py-3 rounded-full font-medium transition-all flex items-center justify-center gap-2 group ${
                   plan.popular
                     ? "bg-primary text-primary-foreground hover:opacity-90 glow"
@@ -105,7 +107,7 @@ export function PricingSection() {
               >
                 {plan.cta}
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
+              </Link>
             </div>
           ))}
         </div>

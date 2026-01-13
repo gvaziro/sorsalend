@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState, useEffect } from "react"
 import { ArrowUpRight, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
@@ -141,13 +142,13 @@ export function HeroSection() {
               </form>
 
               {/* Primary CTA */}
-              <button 
-                onClick={handleSearch}
+              <Link 
+                href="https://app.sorsa.io"
                 className="group relative inline-flex items-center justify-center gap-2 px-10 py-4 text-base font-bold bg-primary text-primary-foreground rounded-full hover:opacity-95 transition-all glow active:scale-95"
               >
                 Start analyzing
                 <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>

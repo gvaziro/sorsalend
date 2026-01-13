@@ -99,20 +99,23 @@ export function Header() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3 shrink-0">
-            <button className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Sign in
-            </button>
-            <button className="group flex items-center gap-1.5 px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow">
+            <Link 
+              href="https://app.sorsa.io"
+              className="group flex items-center gap-1.5 px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow"
+            >
               Get started
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </Link>
           </div>
 
           {/* Mobile CTA */}
-          <button className="md:hidden group flex items-center gap-1.5 px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow shrink-0">
+          <Link 
+            href="https://app.sorsa.io"
+            className="md:hidden group flex items-center gap-1.5 px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow shrink-0"
+          >
             Get started
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </button>
+          </Link>
         </div>
       </div>
     </header>
