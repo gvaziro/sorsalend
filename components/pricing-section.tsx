@@ -34,7 +34,12 @@ export function PricingSection() {
   const [isYearly, setIsYearly] = useState(true)
 
   return (
-    <section id="pricing" className="py-16 sm:py-24 lg:py-32 relative">
+    <section id="pricing" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-[radial-gradient(circle,rgba(36,121,255,0.03)_0%,transparent_70%)] pointer-events-none" />
+
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">

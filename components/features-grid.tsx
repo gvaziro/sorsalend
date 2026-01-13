@@ -226,6 +226,10 @@ export function FeaturesGrid() {
     <section id="features" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
       
+      {/* Background Glows */}
+      <div className="absolute top-1/4 -left-24 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-24 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-20">

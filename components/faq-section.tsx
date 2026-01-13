@@ -34,7 +34,12 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 relative">
+    <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[140px] pointer-events-none opacity-60" />
+      <div className="absolute -bottom-24 -left-24 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">

@@ -3,8 +3,12 @@ import { Code2, ArrowUpRight } from "lucide-react"
 
 export function APISection() {
   return (
-    <section id="api" className="py-16 sm:py-24 lg:py-32 relative">
+    <section id="api" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/[0.02] to-transparent" />
+      
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none opacity-50" />
+      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

@@ -505,8 +505,9 @@ export function AudienceSection() {
       <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
       
       {/* Decorative background glows */}
-      <div className="absolute top-0 left-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary/10 rounded-full blur-[100px] sm:blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/5 rounded-full blur-[120px] sm:blur-[150px] pointer-events-none" />
+      <div className="absolute -top-24 left-1/4 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/15 rounded-full blur-[120px] sm:blur-[160px] pointer-events-none opacity-80" />
+      <div className="absolute -bottom-24 right-1/4 w-[500px] sm:w-[800px] h-[500px] sm:h-[800px] bg-accent/10 rounded-full blur-[140px] sm:blur-[180px] pointer-events-none opacity-60" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle,rgba(36,121,255,0.05)_0%,transparent_70%)] pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="text-center mb-12 sm:mb-20">
