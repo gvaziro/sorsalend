@@ -46,26 +46,7 @@ export function Header() {
           {/* Desktop Nav / Search Replacement */}
           <div className="hidden md:flex flex-1 items-center justify-center max-w-xl">
             <AnimatePresence mode="wait">
-              {!showSearch ? (
-                <motion.nav 
-                  key="nav"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-1"
-                >
-                  {["Features", "API", "Pricing"].map((item) => (
-                    <Link
-                      key={item}
-                      href={`#${item.toLowerCase()}`}
-                      className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
-                    >
-                      {item}
-                    </Link>
-                  ))}
-                </motion.nav>
-              ) : (
+              {showSearch && (
                 <motion.div 
                   key="search"
                   initial={{ opacity: 0, y: 10 }}
@@ -79,7 +60,7 @@ export function Header() {
                       <Search className="w-4 h-4 text-primary/70" />
                       <input 
                         type="text" 
-                        placeholder="Search @handle..."
+                        placeholder="Search @handle or link..."
                         className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none font-medium"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}

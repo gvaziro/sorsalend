@@ -18,7 +18,6 @@ export default function Home() {
       <FeaturesGrid />
       {/* <VCTrackingSection /> */}
       <APISection />
-      <PricingSection />
       <FAQSection />
       <Footer />
     </main>

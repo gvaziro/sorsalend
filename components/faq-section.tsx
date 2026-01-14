@@ -5,28 +5,28 @@ import { Plus, Minus } from "lucide-react"
 
 const faqs = [
   {
-    question: "How is Sorsa different from other crypto tools?",
+    question: "What is Sorsa?",
     answer:
-      "Sorsa focuses on real influence metrics, not vanity numbers. We detect bots, analyze engagement quality, and track institutional interest from VCs and funds.",
+      "Sorsa (formerly Tweetscout) is a crypto analytics tool that helps you make better decisions using public data from X (formerly Twitter), still the main social network in crypto.",
   },
   {
-    question: "How do you detect bot followers?",
+    question: "What can I use Sorsa for?",
     answer:
-      "Our ML algorithms analyze multiple signals including account age, activity patterns, engagement behavior, and network connections to identify fake accounts with high accuracy.",
+      "Sorsa helps youevaluate an accounts real weight in crypto (Sorsa Score), do faster due diligence and spot red flags, detect bot-inflated audiences, discover early-stage projects and rising accounts",
   },
   {
-    question: "How often is the data updated?",
+    question: "What is the Sorsa Score?",
     answer:
-      "Core metrics are updated daily. The Early Projects feed refreshes every 24 hours. Real-time tracking for watched accounts is available on Pro plans.",
+      "Score reflects how many influential crypto people, projects, and VC-related accounts follow an account, and how influential those followers are. Quality matters more than quantity.",
   },
   {
-    question: "Is there an API available?",
+    question: "What is Bot Followers and how does it work?",
     answer:
-      "Yes, Pro subscribers get full API access to all Sorsa data. Build trading systems, research platforms, or integrate with your existing tools.",
+      "Bot Followers is a Plus feature that estimates what percentage of an account's followers look like bots. It checks followers one-by-one using multiple signals, so large accounts may take longer to process.",
   },
   {
-    question: "Can I cancel anytime?",
-    answer: "Yes, cancel anytime with no questions asked. Your access continues until the end of your billing period.",
+    question: "Can I access your data via API?",
+    answer: "Yes. Sorsa data is available via API. See sorsa.io/api for details.",
   },
 ]
 

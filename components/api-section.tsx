@@ -97,7 +97,7 @@ export function APISection() {
             </ul>
 
             <Link 
-              href="https://sorsa.io/docs.html"
+              href="https://sorsa.io/api"
               className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all glow w-fit"
             >
               View API Details
