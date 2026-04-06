@@ -6,8 +6,8 @@ const footerLinks = [
     category: "Product",
     links: [
       { name: "App", href: "https://app.sorsa.io/" },
-      { name: "API", href: "https://api.sorsa.io" },
-      { name: "Docs", href: "https://api.sorsa.io"},
+      { name: "API", href: "https://api.sorsa.io/" },
+      { name: "Docs", href: "https://api.sorsa.io/" },
     ],
   },
   
